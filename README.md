@@ -170,4 +170,32 @@ Bastará navegar a `localhost:8080` (puede cambiar el puerto) ó hacia la URL de
 Haga click en el link a swagger para ir a la lista de servicios.
 
 ## Describiendo los métodos del backend
-Para describir un API, agregue la notación @Api en su RestController para que se muestre una descripción breve de la función del método.
+Para describir un API, agregue la notación `@Api` en su `@RestController` para que se muestre una descripción breve de la función del método.
+```java
+package com.example.demo.com.clases.gnp.formulario;
+
+// más imports necesarios
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+// más imports necesarios
+
+@RestController
+@Api(value = "API Formulario" , description = " API para operaciones de datos del contrato")
+@RequestMapping("/form")
+public class FormularioController {
+
+	@Autowired
+	FormularioService formularioService;
+
+	// Service, Repository, EntityManagerFactory, etc
+
+	// más operaciones del API
+	
+	@ApiOperation( value = "Guarda datos para generar el contrato en BD", notes = "Requiere un objeto tipo Formulario para insertar")
+    @PostMapping(value = "/insertar")
+    @ResponseBody
+    public ResponseEntity registrarFormulario(@RequestBody Formulario formulario){
+		// lógica del API
+	}
+}
+```
